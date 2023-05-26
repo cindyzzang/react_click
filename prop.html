@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="http://unpkg.com/react@latest/umd/react.development.js" crossorigin></script>
+  <script src="http://unpkg.com/react-dom@latest/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script> //props type 검사
+  <script type="text/babel">
+    function Btn({text,onClick,fontSize}) {
+      return (
+        <button
+        onClick={onClick} 
+        style={{
+          background : "tomato",
+          color : "white",
+          padding : "10px 20px",
+          border : "none",
+          borderRadius : 10,
+          fontSize,
+        }}
+        >
+        {text}        
+        </button>
+      );
+    }
+
+    Btn.propTypes = {
+      text : PropTypes.string.isRequired,
+      fontSize : PropTypes.number,
+    }
+    function App() {
+      const [value, setValue] = React.useState(true)
+      const onClick = () => setValue(value => !value)
+      return (
+        <div>
+          <Btn text = {value ? "save Change" : "Revert" } onClick={onClick} fontSize ={18}/>
+          <Btn text = "Continue" fontSize={14}/>
+        </div>
+      );
+    }
+    const DOM = ReactDOM.createRoot(document.getElementById("root"));
+    DOM.render(<App/>)
+  </script>
+</body>
+</html>
